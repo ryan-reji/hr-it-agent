@@ -1,0 +1,25 @@
+# Add service definitions here.
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: hr_it_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: hr_it_helpdesk
+      POSTGRES_USER: hr_admin
+      POSTGRES_PASSWORD: hr_local_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hr_admin -d hr_it_helpdesk"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
