@@ -7,6 +7,7 @@ The system allows employees to ask questions about company policies, retrieve th
 It combines semantic document retrieval with controlled database access, allowing the agent to handle both general policy questions and employee-specific queries.
 
 ---
+**Youtube Demo Link:** https://youtu.be/cH46VxKrJOc
 
 ## 1. Key Features
 
